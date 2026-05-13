@@ -19,7 +19,29 @@ class ResultResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema->components([]); 
+        return $schema->components([
+            \Filament\Forms\Components\Section::make('Result Snapshot Summary')
+                ->description('These details are snapshotted at the time of result generation and are immutable when locked.')
+                ->schema([
+                    \Filament\Forms\Components\Grid::make(3)->schema([
+                        \Filament\Forms\Components\TextInput::make('student.name')->label('Student Name')->readOnly(),
+                        \Filament\Forms\Components\TextInput::make('student.roll_no')->label('Roll No')->readOnly(),
+                        \Filament\Forms\Components\TextInput::make('semester.name')->label('Semester')->readOnly(),
+                    ]),
+                    \Filament\Forms\Components\Grid::make(4)->schema([
+                        \Filament\Forms\Components\TextInput::make('gpa')->label('Semester GPA')->readOnly(),
+                        \Filament\Forms\Components\TextInput::make('cgpa')->label('CGPA')->readOnly(),
+                        \Filament\Forms\Components\TextInput::make('status')->label('Status')->readOnly(),
+                        \Filament\Forms\Components\TextInput::make('publication_status')->label('Publication')->readOnly(),
+                    ]),
+                ]),
+            \Filament\Forms\Components\Section::make('Integrity Metadata')
+                ->collapsed()
+                ->schema([
+                    \Filament\Forms\Components\TextInput::make('verification_token')->label('Verification Token')->readOnly(),
+                    \Filament\Forms\Components\TextInput::make('snapshot_hash')->label('SHA-256 Integrity Hash')->readOnly()->columnSpanFull(),
+                ]),
+        ]); 
     }
 
     public static function table(Table $table): Table

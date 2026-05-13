@@ -20,7 +20,20 @@ class AuditLogResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema->components([]);
+        return $schema->components([
+            \Filament\Forms\Components\Section::make('Audit Event Details')
+                ->schema([
+                    \Filament\Forms\Components\TextInput::make('event')->readOnly(),
+                    \Filament\Forms\Components\TextInput::make('actor_id')->label('Actor (User ID)')->readOnly(),
+                    \Filament\Forms\Components\TextInput::make('subject_type')->readOnly(),
+                    \Filament\Forms\Components\TextInput::make('subject_id')->readOnly(),
+                    \Filament\Forms\Components\KeyValue::make('metadata')
+                        ->label('Event Metadata')
+                        ->readOnly()
+                        ->columnSpanFull(),
+                    \Filament\Forms\Components\DateTimePicker::make('created_at')->readOnly(),
+                ])->columns(2),
+        ]);
     }
 
     public static function table(Table $table): Table
