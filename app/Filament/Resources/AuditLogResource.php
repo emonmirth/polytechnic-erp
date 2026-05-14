@@ -21,7 +21,7 @@ class AuditLogResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            \Filament\Forms\Components\Section::make('Audit Event Details')
+            \Filament\Schemas\Components\Section::make('Audit Event Details')
                 ->schema([
                     \Filament\Forms\Components\TextInput::make('event')->readOnly(),
                     \Filament\Forms\Components\TextInput::make('actor_id')->label('Actor (User ID)')->readOnly(),

@@ -7,16 +7,16 @@ use App\Models\Semester;
 use App\Models\Session;
 use App\Services\TabulationService;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Schemas\Schema;
 use Filament\Pages\Page;
 use Filament\Actions\Action;
 
-class TabulationSheet extends Page implements HasForms
+class TabulationSheet extends Page implements HasSchemas
 {
-    use InteractsWithForms;
+    use InteractsWithSchemas;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-table-cells';
     protected static string|\UnitEnum|null $navigationGroup = 'Result Management';
@@ -30,9 +30,9 @@ class TabulationSheet extends Page implements HasForms
         $this->form->fill();
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Section::make('Filter Tabulation Sheet')
                     ->schema([

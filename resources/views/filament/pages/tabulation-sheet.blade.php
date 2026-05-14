@@ -1,7 +1,7 @@
-<x-filament-panels::page>
-    <x-filament-panels::form wire:submit="generateReport">
+<x-filament::page>
+    <form wire:submit.prevent="generateReport">
         {{ $this->form }}
-    </x-filament-panels::form>
+    </form>
 
     @if($reportData)
         <div class="mt-8 overflow-x-auto bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800">
@@ -52,4 +52,4 @@
             <p class="text-gray-500">Please select filters and click "Load Tabulation Sheet" to view results.</p>
         </div>
     @endif
-</x-filament-panels::page>
+</x-filament::page>
